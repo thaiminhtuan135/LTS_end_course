@@ -34,6 +34,7 @@ public class CourseController {
         return typeCourseService.getTypeCourseById(typeCourseId).map(typeCourse -> {
             Course course1 = gson.fromJson(course, Course.class);
             course1.setTypeCourse(typeCourse);
+            course1.setTypeCourse_id(typeCourse.getId());
             return new ResponseEntity<>(courseService.save(course1), HttpStatus.OK);
         }).orElseGet(
                 () -> new ResponseEntity<>(HttpStatus.NOT_FOUND)
@@ -52,6 +53,7 @@ public class CourseController {
                 Course course2 = gson.fromJson(course, Course.class);
                 course2.setId(course1.getId());
                 course2.setTypeCourse(typeCourse);
+                course2.setTypeCourse_id(typeCourse.getId());
                 return new ResponseEntity<>(courseService.save(course2), HttpStatus.OK);
             } catch (NoSuchElementException e) {
                 return new ResponseEntity<Course>(HttpStatus.NOT_FOUND);
