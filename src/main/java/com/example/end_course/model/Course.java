@@ -1,10 +1,12 @@
 package com.example.end_course.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -32,4 +34,8 @@ public class Course {
     @JoinColumn(name = "typeCourse_id")
     @JsonBackReference
     private TypeCourse typeCourse;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "course")
+    @JsonManagedReference
+    private List<Register> registers;
 }
