@@ -18,30 +18,30 @@ import java.util.NoSuchElementException;
 public class TypePostController {
     @Autowired
     private TypePostService typePostService;
-    private final Gson gson = new Gson();
+    private final com.google.gson.Gson gson = com.example.end_course.util.Gson.gson();
     @GetMapping("/list")
     public List<TypePost> getTypePost() {
         return typePostService.getTypePosts();
     }
 
     @PostMapping("/create")
-    public ResponseEntity<TypePost> create(@RequestBody String typePost) {
-
+    public ResponseEntity<?> create(@RequestBody String typePost) {
         try {
             TypePost typePost1 = gson.fromJson(typePost, TypePost.class);
+            System.out.println(typePost1);
             return new ResponseEntity<>(typePostService.save(typePost1), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Create fail",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/{id}/edit")
-    public ResponseEntity<TypePost> update(@RequestBody String typePost, @PathVariable Integer id) {
+    public ResponseEntity<TypePost> update(@RequestBody String dataUpdate, @PathVariable Integer id) {
 
         return typePostService.getTypePostById(id).map(typePost1 -> {
-            TypePost typeCourse2 = gson.fromJson(typePost, TypePost.class);
-            typeCourse2.setId(typePost1.getId());
-            return new ResponseEntity<>(typePostService.save(typeCourse2), HttpStatus.OK);
+            TypePost typePost2 = gson.fromJson(dataUpdate, TypePost.class);
+            typePost2.setId(typePost1.getId());
+            return new ResponseEntity<>(typePostService.save(typePost2), HttpStatus.OK);
 
         }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

@@ -26,6 +26,8 @@ public class Post {
     private String author;
     private String content;
     private String shortContent;
+    @Column(name = "topic_id",insertable = false, updatable = false)
+    private int topic_id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "topic_id")
     @JsonBackReference
