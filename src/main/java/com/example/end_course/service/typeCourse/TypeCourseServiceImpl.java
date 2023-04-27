@@ -3,6 +3,8 @@ package com.example.end_course.service.typeCourse;
 import com.example.end_course.model.TypeCourse;
 import com.example.end_course.repository.TypeCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,5 +32,10 @@ public class TypeCourseServiceImpl implements TypeCourseService{
     @Override
     public List<TypeCourse> getTypeCourses() {
         return typeCourseRepository.findAll();
+    }
+
+    @Override
+    public Page<TypeCourse> pagination(Pageable pageable) {
+        return typeCourseRepository.findAll(pageable);
     }
 }

@@ -1,8 +1,13 @@
 package com.example.end_course.controller;
 
 import com.example.end_course.model.TypeCourse;
+import com.example.end_course.repository.TypeCourseRepository;
 import com.example.end_course.util.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +23,8 @@ import java.util.NoSuchElementException;
 public class TypeCourseController {
     @Autowired
     private TypeCourseService typeCourseService;
+    @Autowired
+    private TypeCourseRepository typeCourseRepository;
     private final com.google.gson.Gson gson = Gson.gson();
 
     @GetMapping("/list")
@@ -63,5 +70,12 @@ public class TypeCourseController {
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/pagination")
+    public Page<TypeCourse> pagination(@RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+        return typeCourseService.pagination(pageable);
     }
 }
