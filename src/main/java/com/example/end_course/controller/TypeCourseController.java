@@ -3,6 +3,8 @@ package com.example.end_course.controller;
 import com.example.end_course.model.TypeCourse;
 import com.example.end_course.repository.TypeCourseRepository;
 import com.example.end_course.util.Gson;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +18,7 @@ import com.example.end_course.service.typeCourse.TypeCourseService;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 @RestController
 @CrossOrigin
@@ -33,10 +36,11 @@ public class TypeCourseController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<TypeCourse> create(@RequestBody String typeCourse) {
+    public ResponseEntity<TypeCourse> create(@Valid @RequestBody String typeCourse) {
+
         try {
             TypeCourse typeCourse1 = gson.fromJson(typeCourse, TypeCourse.class);
-            return new ResponseEntity<>(typeCourseService.save(typeCourse1), HttpStatus.OK);
+            return new ResponseEntity<>(typeCourseService.save(typeCourse1), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -81,7 +81,7 @@ public class Registercontroller {
             register1.setStudent(student.get());
             register1.setStudent_id(studentId);
 
-            return new ResponseEntity<>(registerService.save(register1), HttpStatus.OK);
+            return new ResponseEntity<>(registerService.save(register1), HttpStatus.CREATED);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

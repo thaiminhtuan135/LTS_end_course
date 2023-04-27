@@ -37,7 +37,7 @@ public class TopicController {
             Topic topic1 = gson.fromJson(topic, Topic.class);
             topic1.setTypePost(typePost);
             topic1.setTypePost_id(typePost.getId());
-            return new ResponseEntity<>(topicService.save(topic1), HttpStatus.OK);
+            return new ResponseEntity<>(topicService.save(topic1), HttpStatus.CREATED);
         }).orElseGet(
                 () -> new ResponseEntity<>(HttpStatus.NOT_FOUND)
         );

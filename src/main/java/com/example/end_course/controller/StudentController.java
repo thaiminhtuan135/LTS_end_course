@@ -29,7 +29,7 @@ public class StudentController {
     private ResponseEntity<?> create(@RequestBody String student) {
         try {
             Student student1 = gson.fromJson(student, Student.class);
-            return new ResponseEntity<>(studentService.save(student1), HttpStatus.OK);
+            return new ResponseEntity<>(studentService.save(student1), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

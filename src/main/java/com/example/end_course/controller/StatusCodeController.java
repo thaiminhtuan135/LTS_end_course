@@ -29,7 +29,7 @@ public class StatusCodeController {
     private ResponseEntity<Status> create(@RequestBody String status) {
         try {
             Status status1 = gson.fromJson(status, Status.class);
-            return new ResponseEntity<>(statusService.save(status1), HttpStatus.OK);
+            return new ResponseEntity<>(statusService.save(status1), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -36,7 +36,7 @@ public class CourseController {
             Course course1 = gson.fromJson(course, Course.class);
             course1.setTypeCourse(typeCourse);
             course1.setTypeCourse_id(typeCourse.getId());
-            return new ResponseEntity<>(courseService.save(course1), HttpStatus.OK);
+            return new ResponseEntity<>(courseService.save(course1), HttpStatus.CREATED);
         }).orElseGet(
                 () -> new ResponseEntity<>(HttpStatus.NOT_FOUND)
         );

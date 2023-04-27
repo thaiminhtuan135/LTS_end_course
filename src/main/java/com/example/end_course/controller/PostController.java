@@ -57,7 +57,7 @@ public class PostController {
 
             post1.setAccount(account.get());
             post1.setAccount_id(accountId);
-            return new ResponseEntity<>(postService.save(post1), HttpStatus.OK);
+            return new ResponseEntity<>(postService.save(post1), HttpStatus.CREATED);
 
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
