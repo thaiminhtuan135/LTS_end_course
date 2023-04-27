@@ -28,7 +28,7 @@ public class Course {
     private int price;
     private int amount_student;
     private int amount_subject;
-    @Column(name = "typeCourse_id",insertable = false, updatable = false)
+    @Column(name = "typeCourse_id", insertable = false, updatable = false)
     private int typeCourse_id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "typeCourse_id")

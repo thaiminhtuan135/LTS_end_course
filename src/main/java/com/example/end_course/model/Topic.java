@@ -19,17 +19,14 @@ public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
     private String content;
-
     @Column(name = "typePost_id",insertable = false, updatable = false)
     private int typePost_id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "typePost_id")
     @JsonBackReference
     private TypePost typePost;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "topic")
     @JsonManagedReference
     private List<Post> posts;

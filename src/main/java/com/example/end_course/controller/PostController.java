@@ -29,8 +29,8 @@ public class PostController {
     }
 
     @PostMapping("/create/topic/{topicId}")
-    private ResponseEntity<?> create(@RequestBody String post ,
-                                         @PathVariable Integer topicId) {
+    private ResponseEntity<?> create(@RequestBody String post,
+                                     @PathVariable Integer topicId) {
         return topicService.getTopicById(topicId).map(topic -> {
             Post post1 = gson.fromJson(post, Post.class);
             post1.setTopic(topic);
@@ -52,9 +52,9 @@ public class PostController {
                 post1.setTopic_id(topic.getId());
                 return new ResponseEntity<>(postService.save(post1), HttpStatus.OK);
             } catch (NoSuchElementException e) {
-                return new ResponseEntity<>("Topic post not found",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Topic post not found", HttpStatus.NOT_FOUND);
             }
-        }).orElseGet(() -> new ResponseEntity<>("Post not found",HttpStatus.NOT_FOUND));
+        }).orElseGet(() -> new ResponseEntity<>("Post not found", HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/{id}")

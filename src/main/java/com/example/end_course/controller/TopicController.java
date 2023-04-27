@@ -23,6 +23,7 @@ public class TopicController {
     @Autowired
     private TypePostService typePostService;
     private final com.google.gson.Gson gson = Gson.gson();
+
     @GetMapping("/list")
     public List<Topic> getTypePost() {
         return topicService.getTopics();
@@ -30,7 +31,7 @@ public class TopicController {
 
 
     @PostMapping("/create/type-post/{typePostId}")
-    private ResponseEntity<Topic> create(@RequestBody String topic ,
+    private ResponseEntity<Topic> create(@RequestBody String topic,
                                          @PathVariable Integer typePostId) {
         return typePostService.getTypePostById(typePostId).map(typePost -> {
             Topic topic1 = gson.fromJson(topic, Topic.class);
@@ -44,8 +45,8 @@ public class TopicController {
 
     @PutMapping("/{topicId}/edit/type-post/{typePostId}")
     public ResponseEntity<?> update(@RequestBody String dataUpdate,
-                                         @PathVariable Integer topicId,
-                                         @PathVariable Integer typePostId) {
+                                    @PathVariable Integer topicId,
+                                    @PathVariable Integer typePostId) {
 
         return topicService.getTopicById(topicId).map(topic -> {
 
@@ -57,16 +58,16 @@ public class TopicController {
                 topic1.setTypePost_id(typePost.getId());
                 return new ResponseEntity<>(topicService.save(topic1), HttpStatus.OK);
             } catch (NoSuchElementException e) {
-                return new ResponseEntity<>("Type post not found",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Type post not found", HttpStatus.NOT_FOUND);
             }
-        }).orElseGet(() -> new ResponseEntity<>("Topic not found",HttpStatus.NOT_FOUND));
+        }).orElseGet(() -> new ResponseEntity<>("Topic not found", HttpStatus.NOT_FOUND));
     }
 
 
     @GetMapping("/{id}")
     public ResponseEntity<Topic> getbyId(@PathVariable Integer id) {
         try {
-            Topic topic = topicService.getTopicById(id).get()   ;
+            Topic topic = topicService.getTopicById(id).get();
             return new ResponseEntity<>(topic, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

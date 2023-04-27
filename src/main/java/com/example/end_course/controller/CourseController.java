@@ -23,6 +23,7 @@ public class CourseController {
     @Autowired
     private TypeCourseService typeCourseService;
     private final com.google.gson.Gson gson = Gson.gson();
+
     @GetMapping("/list")
     public List<Course> getCourses() {
         return courseService.getCourses();
@@ -43,8 +44,8 @@ public class CourseController {
 
     @PutMapping("/{courseId}/edit/type-course/{typeCourseId}")
     public ResponseEntity<Course> update(@RequestBody String course,
-                                             @PathVariable Integer courseId,
-                                             @PathVariable Integer typeCourseId) {
+                                         @PathVariable Integer courseId,
+                                         @PathVariable Integer typeCourseId) {
 
         return courseService.getCourseById(courseId).map(course1 -> {
 
@@ -64,7 +65,7 @@ public class CourseController {
     @GetMapping("/{id}")
     public ResponseEntity<Course> getbyId(@PathVariable Integer id) {
         try {
-            Course course = courseService.getCourseById(id).get()   ;
+            Course course = courseService.getCourseById(id).get();
             return new ResponseEntity<>(course, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

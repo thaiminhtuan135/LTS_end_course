@@ -25,14 +25,14 @@ public class Register {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @Column(name = "student_id",insertable = false, updatable = false)
+    @Column(name = "student_id", insertable = false, updatable = false)
     private int student_id;
-    @Column(name = "course_id",insertable = false, updatable = false)
+    @Column(name = "course_id", insertable = false, updatable = false)
     private int course_id;
-    @Column(name = "status_id",insertable = false, updatable = false)
+    @Column(name = "status_id", insertable = false, updatable = false)
     private int status_id;
 
-    @Column(name = "account_id",insertable = false, updatable = false)
+    @Column(name = "account_id", insertable = false, updatable = false)
     private int account_id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")

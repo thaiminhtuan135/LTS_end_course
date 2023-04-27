@@ -20,7 +20,6 @@ public class TypeCourse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "typeCourse")
     @JsonManagedReference
     private List<Course> courses;

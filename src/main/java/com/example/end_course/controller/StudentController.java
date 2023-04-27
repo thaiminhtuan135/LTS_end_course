@@ -43,6 +43,7 @@ public class StudentController {
             return new ResponseEntity<>(studentService.save(student1), HttpStatus.OK);
         }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getbyId(@PathVariable Integer id) {
         try {

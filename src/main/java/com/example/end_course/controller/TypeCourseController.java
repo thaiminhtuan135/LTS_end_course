@@ -47,12 +47,13 @@ public class TypeCourseController {
     @GetMapping("/{id}")
     public ResponseEntity<TypeCourse> getbyId(@PathVariable Integer id) {
         try {
-            TypeCourse typeCourse = typeCourseService.getTypeCourseById(id).get()   ;
-            return new ResponseEntity<>(typeCourse,HttpStatus.OK);
+            TypeCourse typeCourse = typeCourseService.getTypeCourseById(id).get();
+            return new ResponseEntity<>(typeCourse, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         try {

@@ -24,7 +24,7 @@ public class Account {
     private String account;
     private String password;
 
-    @Column(name = "role_id",insertable = false, updatable = false)
+    @Column(name = "role_id", insertable = false, updatable = false)
     private int role_id;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "account")
     @JsonManagedReference

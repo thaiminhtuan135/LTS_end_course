@@ -116,25 +116,24 @@ public class Registercontroller {
 
         return registerService.getRegisterById(registerId).map(register -> {
 
-                Register register1 = gson.fromJson(dataUpdate, Register.class);
-                register1.setId(register.getId());
+            Register register1 = gson.fromJson(dataUpdate, Register.class);
+            register1.setId(register.getId());
 
-                register1.setAccount(account.get());
-                register1.setAccount_id(accountId);
+            register1.setAccount(account.get());
+            register1.setAccount_id(accountId);
 
-                register1.setCourse(course.get());
-                register1.setCourse_id(courseId);
+            register1.setCourse(course.get());
+            register1.setCourse_id(courseId);
 
-                register1.setStatus(status.get());
-                register1.setStatus_id(statusId);
+            register1.setStatus(status.get());
+            register1.setStatus_id(statusId);
 
-                register1.setStudent(student.get());
-                register1.setStudent_id(studentId);
-                registerService.save(register1);
+            register1.setStudent(student.get());
+            register1.setStudent_id(studentId);
+            registerService.save(register1);
 
-                return new ResponseEntity<>("Update successfully",HttpStatus.OK);
-//                return new ResponseEntity<>("Topic post not found",HttpStatus.NOT_FOUND);
-        }).orElseGet(() -> new ResponseEntity<>("Register not found",HttpStatus.NOT_FOUND));
+            return new ResponseEntity<>("Update successfully", HttpStatus.OK);
+        }).orElseGet(() -> new ResponseEntity<>("Register not found", HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/{id}")

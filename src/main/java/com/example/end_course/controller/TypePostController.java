@@ -19,6 +19,7 @@ public class TypePostController {
     @Autowired
     private TypePostService typePostService;
     private final com.google.gson.Gson gson = com.example.end_course.util.Gson.gson();
+
     @GetMapping("/list")
     public List<TypePost> getTypePost() {
         return typePostService.getTypePosts();
@@ -31,7 +32,7 @@ public class TypePostController {
             System.out.println(typePost1);
             return new ResponseEntity<>(typePostService.save(typePost1), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Create fail",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Create fail", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -49,8 +50,8 @@ public class TypePostController {
     @GetMapping("/{id}")
     public ResponseEntity<TypePost> getbyId(@PathVariable Integer id) {
         try {
-            TypePost typePost = typePostService.getTypePostById(id).get()   ;
-            return new ResponseEntity<>(typePost,HttpStatus.OK);
+            TypePost typePost = typePostService.getTypePostById(id).get();
+            return new ResponseEntity<>(typePost, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
