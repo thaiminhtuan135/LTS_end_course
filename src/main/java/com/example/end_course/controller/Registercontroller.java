@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -130,10 +131,9 @@ public class Registercontroller {
 
             register1.setStudent(student.get());
             register1.setStudent_id(studentId);
-            registerService.save(register1);
 
-            return new ResponseEntity<>("Update successfully", HttpStatus.OK);
-        }).orElseGet(() -> new ResponseEntity<>("Register not found", HttpStatus.NOT_FOUND));
+            return new ResponseEntity<>(registerService.save(register1), HttpStatus.OK);
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Register not found"));
     }
 
     @GetMapping("/{id}")
