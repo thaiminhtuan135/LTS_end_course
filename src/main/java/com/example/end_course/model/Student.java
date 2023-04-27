@@ -24,9 +24,7 @@ public class Student {
 
     private LocalDate dob;
     private String telephone;
-
     private String email;
-
     private String province;
     private String district;
     private String wards;
@@ -36,6 +34,4 @@ public class Student {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "student")
     @JsonManagedReference
     private List<Register> registers;
-
-
 }

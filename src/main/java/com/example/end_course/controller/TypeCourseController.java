@@ -42,8 +42,6 @@ public class TypeCourseController {
             typeCourse1.setName(typeCourse2.getName());
             return new ResponseEntity<>(typeCourseService.save(typeCourse1), HttpStatus.OK);
         }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-
-
     }
 
     @GetMapping("/{id}")
